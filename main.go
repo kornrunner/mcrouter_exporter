@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"errors"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/log"
@@ -400,6 +401,10 @@ func getStats(conn net.Conn) (map[string]string, error) {
 		}
 
 		result := strings.Split(line, " ")
+		if len(result) < 2 {
+			return nil, errors.New("Bad stat string")
+		}
+
 		value := strings.TrimRight(result[2], "\r\n")
 		m[result[1]] = value
 	}
