@@ -378,7 +378,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 func parse(stats map[string]string, key string) float64 {
 	v, err := strconv.ParseFloat(stats[key], 64)
 	if err != nil {
-		log.Errorf("Failed to parse %s %q: %s", key, stats[key], err)
+		// log.Errorf("Failed to parse %s %q: %s", key, stats[key], err)
 		v = math.NaN()
 	}
 	return v
